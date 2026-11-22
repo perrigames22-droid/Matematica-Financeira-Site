@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FINANÇAS 2B - Educação Financeira</title>
+<meta name="description" content="Simuladores de financiamento (SAC e PRICE) e renda fixa, com conteúdo educativo. Trabalho escolar do 2º B - SENAC Campinas.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="#inicio">FINANÇAS 2B</a>
+  <button id="menu" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  <nav id="nav">
+    <a href="#inicio">Início</a><a href="#financiamentos">Financiamentos</a><a href="#investimentos">Investimentos</a>
+    <a href="#aprenda">Aprenda</a><a href="#reflexao">Reflexão</a><a href="#fontes">Fontes e créditos</a>
+  </nav>
+</header>
+<main>
+
+<section class="page" id="inicio">
+  <div class="hero">
+    <h1>FINANÇAS 2B</h1>
+    <p class="sub">Decida com informação</p>
+    <p>Plataforma educativa para entender financiamentos, comparar SAC e PRICE, simular investimentos em renda fixa e conhecer riscos e modalidades de investimento. Tudo é calculado no seu navegador: não pedimos login nem dados pessoais.</p>
+    <a class="btn" href="#financiamentos">Começar a simular</a>
+  </div>
+  <div class="grid">
+    <a class="card" href="#financiamentos"><h3>Financiamentos</h3><p class="mut">Simule SAC e PRICE e compare parcelas, juros e saldo devedor.</p></a>
+    <a class="card" href="#investimentos"><h3>Investimentos</h3><p class="mut">Projete o crescimento de um capital com juros compostos.</p></a>
+    <a class="card" href="#aprenda"><h3>Aprenda</h3><p class="mut">Poupança, CDB, LCI, LCA, Tesouro, ações e FIIs explicados.</p></a>
+    <a class="card" href="#reflexao"><h3>Reflexão financeira</h3><p class="mut">Por que investir não garante enriquecer.</p></a>
+  </div>
+  <h2 style="margin-top:32px">O que você encontra aqui</h2>
+  <p>Dois simuladores reais, com tabela mensal e gráficos; uma página com as principais modalidades de investimento; uma reflexão crítica sobre renda, inflação e promessas de lucro fácil; e a lista de fontes consultadas. O conteúdo é educativo e não é recomendação de investimento.</p>
+</section>
+
+<section class="page" id="financiamentos">
+  <h2>Simulador de financiamentos</h2>
+  <div class="aviso">A simulação <b>não inclui</b> seguros, tarifas, IOF ou outros encargos. O valor real de um contrato pode ser maior.</div>
+  <form id="fin" novalidate class="card">
+    <div><label for="f-valor">Valor financiado (R$)</label><input id="f-valor" name="valor" inputmode="decimal" placeholder="Ex.: 10000" autocomplete="off"><span class="err" data-for="valor"></span></div>
+    <div><label for="f-taxa">Taxa de juros mensal (%)</label><input id="f-taxa" name="taxa" inputmode="decimal" placeholder="Ex.: 2" autocomplete="off"><span class="err" data-for="taxa"></span></div>
+    <div><label for="f-parcelas">Número de parcelas</label><input id="f-parcelas" name="parcelas" inputmode="numeric" placeholder="Ex.: 10" autocomplete="off"><span class="err" data-for="parcelas"></span></div>
+    <div><label for="f-sis">Sistema</label><select id="f-sis" name="sis"><option value="SAC">SAC</option><option value="PRICE">PRICE</option></select></div>
+    <div class="acts"><button class="btn" type="submit">Simular</button><button class="btn sec" type="reset">Limpar</button></div>
+  </form>
+  <p class="ok" id="fin-st" role="status"></p>
+  <div class="res" id="fin-res" hidden>
+    <div class="grid" id="fin-kpi"></div>
+    <h3 style="margin-top:20px">Comparação SAC × PRICE (mesmos dados)</h3>
+    <div class="card" id="fin-cmp"></div>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><h3>Valor das prestações</h3><svg id="g-pres" role="img" aria-label="Gráfico da evolução das prestações"></svg></div>
+      <div class="card"><h3>Saldo devedor</h3><svg id="g-saldo" role="img" aria-label="Gráfico da evolução do saldo devedor"></svg></div>
+    </div>
+    <h3 style="margin-top:20px" id="fin-tit"></h3>
+    <div id="fin-tab"></div>
+  </div>
+  <details class="card" style="margin-top:20px"><summary>Fórmulas utilizadas</summary>
+    <p><b>SAC:</b> amortização = PV ÷ n; juros = saldo anterior × taxa; prestação = amortização + juros; saldo final = saldo inicial − amortização.</p>
+    <p><b>PRICE:</b> PMT = PV × i ÷ [1 − (1 + i)<sup>−n</sup>]; juros = saldo inicial × taxa; amortização = PMT − juros. Com taxa zero, as duas parcelas valem PV ÷ n. A última parcela é ajustada em centavos para quitar o saldo.</p>
+  </details>
+</section>
+
+<section class="page" id="investimentos">
+  <h2>Simulador de renda fixa</h2>
+  <form id="inv" novalidate class="card">
+    <div><label for="i-capital">Capital inicial (R$)</label><input id="i-capital" name="capital" inputmode="decimal" placeholder="Ex.: 1000" autocomplete="off"><span class="err" data-for="capital"></span></div>
+    <div><label for="i-prazo">Prazo (meses)</label><input id="i-prazo" name="prazo" inputmode="numeric" placeholder="Ex.: 12" autocomplete="off"><span class="err" data-for="prazo"></span></div>
+    <div><label for="i-taxa">Taxa mensal estimada (%)</label><input id="i-taxa" name="taxa" inputmode="decimal" placeholder="Ex.: 1" autocomplete="off"><span class="err" data-for="taxa"></span></div>
+    <div class="acts"><button class="btn" type="submit">Calcular</button><button class="btn sec" type="reset">Limpar</button></div>
+  </form>
+  <div class="aviso">Esta é uma projeção bruta e simplificada. Não considera impostos, taxas, inflação ou mudanças na rentabilidade. O resultado não representa garantia de retorno.</div>
+  <p class="ok" id="inv-st" role="status"></p>
+  <div class="res" id="inv-res" hidden>
+    <div class="grid" id="inv-kpi"></div>
+    <div class="card" style="margin-top:14px"><h3>Evolução mensal do saldo</h3><svg id="g-inv" role="img" aria-label="Gráfico da evolução do saldo"></svg></div>
+    <div id="inv-tab"></div>
+  </div>
+  <details class="card" style="margin-top:20px"><summary>Fórmula utilizada</summary><p>M = C × (1 + i)<sup>n</sup> e rendimento = M − C, com i em decimal (1% = 0,01). Com taxa zero, o saldo não muda.</p></details>
+</section>
+
+<section class="page" id="aprenda">
+  <h2>Aprenda: modalidades de investimento</h2>
+  <div class="aviso">Não informamos taxas fixas: as condições dependem do produto, da instituição emissora e das regras vigentes. Confirme sempre nas fontes oficiais.</div>
+  <h3>Renda fixa</h3><div class="grid" id="rf"></div>
+  <h3 style="margin-top:28px">Renda variável</h3><div class="grid" id="rv"></div>
+</section>
+
+<section class="page" id="reflexao">
+  <h2>Investir não garante enriquecer</h2>
+  <div class="grid">
+    <div class="card"><h3>1. Renda e desigualdade</h3><p>Investir exige que sobre dinheiro. Muitas famílias usam quase toda a renda com moradia, alimentação e transporte e não conseguem separar uma parte. O conselho "invista mais" não vale igual para todos.</p></div>
+    <div class="card"><h3>2. Poder de compra</h3><p>Rendimento <b>nominal</b> é o valor que aparece no extrato. Rendimento <b>real</b> desconta a inflação e mostra quanto o dinheiro realmente compra. Exemplo hipotético: se rende 6% e os preços sobem 5%, o ganho real é de cerca de 1%.</p></div>
+    <div class="card"><h3>3. Renda passiva</h3><p>É a renda recorrente que vem de um patrimônio (juros, dividendos, aluguéis). Exige capital já acumulado, planejamento e avaliação de riscos: os rendimentos podem variar ou deixar de existir.</p></div>
+    <div class="card"><h3>4. Retiradas</h3><p>Retirar mais do que o rendimento mensal consome o próprio capital. Com menos capital, os rendimentos futuros também diminuem e o patrimônio encolhe.</p></div>
+    <div class="card"><h3>5. Promessas de lucro fácil</h3><p>Desconfie de retorno alto "garantido", pressa para decidir, pedido de dinheiro adiantado e indicação de pirâmides. Antes de investir, confirme se a instituição e a oferta são autorizadas pelo Banco Central ou pela CVM.</p></div>
+  </div>
+  <h3 style="margin-top:24px">Exemplo hipotético (1% ao mês)</h3>
+  <div class="grid">
+    <div class="card kpi"><b>R$ 10,00</b><span>rendimento bruto no 1º mês sobre R$ 1.000,00</span></div>
+    <div class="card kpi"><b>R$ 1.000,00</b><span>rendimento bruto no 1º mês sobre R$ 100.000,00</span></div>
+  </div>
+  <div class="aviso">A taxa é hipotética: não é promessa de rentabilidade e não considera impostos, custos ou inflação. A mesma taxa rende muito mais em reais para quem já tem mais capital.</div>
+</section>
+
+<section class="page" id="fontes">
+  <h2>Fontes e créditos</h2>
+  <div class="scroll"><table style="min-width:640px"><thead><tr><th>Instituição / fonte</th><th>Assunto</th><th>Link oficial</th><th>Data de consulta</th></tr></thead><tbody>
+    <tr><td>Banco Central do Brasil</td><td>Juros, financiamentos, regulação</td><td><a href="https://www.bcb.gov.br" rel="noopener">bcb.gov.br</a></td><td>A preencher</td></tr>
+    <tr><td>CVM</td><td>Valores mobiliários, ações, fundos</td><td><a href="https://www.gov.br/cvm" rel="noopener">gov.br/cvm</a></td><td>A preencher</td></tr>
+    <tr><td>Tesouro Direto</td><td>Tesouro Selic, Prefixado e IPCA+</td><td><a href="https://www.tesourodireto.com.br" rel="noopener">tesourodireto.com.br</a></td><td>A preencher</td></tr>
+    <tr><td>FGC</td><td>Garantia de depósitos e limites</td><td><a href="https://www.fgc.org.br" rel="noopener">fgc.org.br</a></td><td>A preencher</td></tr>
+    <tr><td>Receita Federal</td><td>Tributação de investimentos</td><td><a href="https://www.gov.br/receitafederal" rel="noopener">gov.br/receitafederal</a></td><td>A preencher</td></tr>
+    <tr><td>Portal do Investidor</td><td>Educação financeira</td><td><a href="https://www.gov.br/investidor" rel="noopener">gov.br/investidor</a></td><td>A preencher</td></tr>
+  </tbody></table></div>
+  <p class="mut">As datas de consulta ficam "A preencher": o grupo deve registrar o dia em que consultar cada site. Os links apontam para a página inicial de cada fonte; confirme-os antes da entrega.</p>
+  <h3>Integrantes</h3>
+  <div class="grid"><div class="card">João Pedro Nascimento Silva</div><div class="card">Antony Ferraz de Barros</div><div class="card">Luca Perri</div><div class="card">Enzo Carvalho Petrocco</div></div>
+</section>
+
+</main>
+<footer>FINANÇAS 2B - Educação Financeira · Turma 2º B · SENAC Campinas<br>Trabalho escolar com fins educativos. Não é recomendação de investimento.</footer>
+<script src="calc.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
